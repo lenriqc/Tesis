@@ -1,0 +1,111 @@
+\documentclass[a4paper,10pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+%\usepackage[latin1]{inputenc}  
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\author{Luis Enrique Quintanar Cortés}
+\title{Tesis}
+
+\begin{document}
+El modelo de Ising representa una red de $N$ espines en donde cada espín puede estar en
+ dos posiciones, $+1$ o $-1$. Se denota a:
+\begin{equation}
+ \sigma_i = \left\{
+\begin{array}{c l}
+ 1 \\
+ -1 
+\end{array}
+\right.
+\end{equation}
+como el valor del i-ésimo espín de la red.
+De esta forma, en cada vértice de la red hay un átomo o molécula que tiene asociado un momento
+ magnético o espín con únicamente dos valores posibles.
+La energía de interacción del modelo de Ising para dos espines está dada por: 
+\begin{equation}
+ E_{i j}= J \sigma_i \sigma_j
+\end{equation}
+
+donde  $J$ es una constante que representa la fuerza de atracción. En la práctica,
+ la interacción entre espines que están muy ``lejos'' entre sí 
+ prácticamente cero, por lo que según sea el interés hay que definir cuál es el rango 
+ de interacción de cada espín. 
+Al sumar todas las energías posibles de interacción entre espines,
+ obtendremos la energía configuracional del sistema y dependerá del estado 
+ en el que se encuentre el sistema, por lo que la denotaremos $E_{int}(\sigma)$ . A éste hay que sumarle 
+ la energía debido a factores externos como puede ser la presencia de algún 
+ campo magnético. En ese caso, la energía externa toma la forma:
+ \begin{equation}
+  E_{ext}(\sigma)= -h J'\sum_{i=1}^N \sigma_i = -h J' M(\sigma)
+ \end{equation}
+
+El Hamiltoniano del sistema está dado por la suma de las energías 
+de todos los pares de espines en la red y la influencia del campo externo:
+\begin{equation}
+ H(\sigma) = \sum_{<i,j>} J\sigma_i \sigma_j - J'h\sum_{i=1}^N \sigma_i
+\end{equation}
+
+La probabilidad de equilibrio de una configuración es la probabilidad de que el sistema
+ se encuentre en una configuración $\sigma$ y depende de la temperatura del baño térmico y del Hamiltoniano, 
+ y tiene la siguiente forma:
+\begin{equation}
+ P_{\beta, H} (\sigma)=\frac{e^{-\beta H(\sigma)}}{Z(\beta)}
+\end{equation}
+
+Para una temperatura fija, si se suman todas las probabilidades de estar en la 
+configuración $\sigma$ para una temperatura fija, se debería obtener $1$. Por 
+lo que se deberá satisfacer:
+\begin{equation}
+ Z(\beta)= \sum_{\sigma} e^{-\beta H(\sigma)}
+\end{equation}
+
+La función de partición contiene toda la información termodinámica del sistema por 
+lo que su estudio es crucial.
+Una vez conocida ésta, cualquier cantidad macroscópica (observable) una temperatura 
+será el promedio de esa cantidad para cada estado microscópico del sistema, con su respectivo peso estadístico, 
+dado por la distribución de Boltzmann, es decir:
+\begin{equation}
+ <O>(\beta)= \sum_{\sigma} Q(\sigma)P_{\beta} (\sigma)=
+\end{equation}
+
+En particular nos interesa estudiar parámetros de orden que son observables que,
+ cuando el sistema se encuentra totalmente ordenado toman un valor máximo (1 si está 
+ normalizado) y un valor mínimo (cero) si el sistema se encuentra en completo desorden.
+ La dificultad radica en encontrar el parámetro adecuado para el sistema en estudio.
+ Para la red cuadrada en un modelo ferromagnético, el parámetro de orden adecuado 
+ es la Magnetización macroscópica. En un modelo ferromagnético la misma red tendrá 
+ un parámetro llmada Magnetización staggered, donde se divide a la red original en 
+ dos subredes como se muestra en la figura. Ahora cada subred tiene una magnetización
+ microcanónica $M_1$ y $M_2$. El parámetro de orden es:
+ \begin{equation}
+  M_s = M_1 -M_2
+ \end{equation}
+ 
+
+ MODELO
+ 
+ En la práctica la función de partición es muy difícil de manipulas pesto que hay 
+ demasiados microestádos posibles para el mismo valor de observable por lo que el
+ cálculo computacional se vuelve prácticamente interminable.
+ 
+Para abordar el problema se agrupan todos los estados con misma energía y en vez 
+de sumar sobre configuraciones microscópicas se suma sobre energías microscópicas. 
+Por lo que la función de partición toma la forma:
+\begin{equation}
+ Z(\beta) = \sum_{\{E\}}\left(\sum_{\{\sigma | H(\sigma) = E\}} e^{-\beta H(\sigma)}\right)
+\end{equation}
+
+La suma entre paréntesis es simplemente un conteo por que la exponencial, tendrá el 
+mismo valor para un $E$ fijo, y entonces podemos reescribir la expresión anterior
+como:
+\begin{equation}
+ Z(\beta) = \sum_{\{E\}} g(E)e^{-\beta H(\sigma)}
+\end{equation}
+donde $g(E)$ es el conteo de configuraciones con energía $E$.
+
+
+
+\end{document}

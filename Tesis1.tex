@@ -1,0 +1,561 @@
+\documentclass[12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+%\usepackage[latin1]{inputenc}  
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{color}
+\usepackage{calligra} 
+\author{Luis Enrique Quintanar Cortés}
+\title{Wang--Landau y estas cosas para Ising }
+
+\begin{document}
+\maketitle
+
+
+\chapter{El modelo de Ising}
+
+El modelo de Ising representa una red de $N$ espines en donde cada espín puede estar en
+ dos posiciones, $+1$ o $-1$. Se denota a:
+\begin{equation}
+ \sigma_i = \left\{
+\begin{array}{c l}
+ 1 \\
+ -1 
+\end{array}
+\right.
+\end{equation}
+como el valor del i-ésimo espín de la red.
+De esta forma, en cada vértice de la red hay un átomo o molécula que tiene asociado un momento
+ magnético o espín con únicamente dos valores posibles.
+La energía de interacción entre un par de espines del modelo de Ising  está dada por: 
+\begin{equation}
+ E_{i j}=  \left\{
+\begin{array}{c l}
+ J \sigma_i \sigma_j & \text{ si $\sigma_{i}$ y $\sigma_{j}$ son espines vecinos o de interacción} \\
+0 & \text{ si no lo son} 
+\end{array}
+\right.
+\end{equation}
+donde  $J$ es una constante obtenida de la naturaleza de la interacción y que además da unidades a la expresión. En la práctica, la interacción entre espines que están muy ``lejos'' es 
+ prácticamente cero, de tal forma que según el modelo de estudio, hay que definir cuál es el rango de interacción de cada espín.
+A una posición particular de todos los espines posibles de la red, se le llama configuración del sistema y se denota con $\sigma$. Así, al sumar todas las energías posibles de interacción entre espines, se obtiene la energía configuracional de la red  $E_{int}(\sigma)$ que dependerá de la configuración en que se encuentre el sistema. Por tanto se tendrá como valor de energía interna o configuracional a
+\begin{equation}
+	E_{(int)}(\sigma)= J \sum_{\langle i,j \rangle} \sigma_{i}\sigma_{j}
+\end{equation}
+con $\langle i,j \rangle =\{i,j\}$ un par no ordenado. Así se suma sobre todos los pares no ordenados de interacción posibles $\langle i,j \rangle$ o pares de espines vecinos. La cantidad de pares que contribuyen a la suma variará de acuerdo a la forma de la red que se utilice para describir al sistema. Sin embargo hay una forma alternativa de obtener la energía de configuración total, en vez de sumar sobre pares no ordenados sumamos sobre pares ordenados, de tal forma que si en la suma contribuye el par $(i,j)$ también se tendrá que incluir a $(j,i)$ pero para corregir esta contribución duplicada se divide entre dos la suma total
+
+\begin{equation}
+E_{(int)}(\sigma) = J \sum_{(i,j)} \sigma_{i}\sigma_{j(i)}=J\frac{1}{2} \sum \limits_{i=1}^{N}\left[ \sigma_{i}\sum_{j=1}^{V} \sigma_{j}(i)\right]
+\end{equation}
+donde $\sigma_{i}$ es el valor del espín i-ésimo, $\sigma_{j(i)}$ es un vecino de $\sigma_{i}$,   $N$ es el número de espines en el sistema y $V$ es el número de vecinos del espín $\sigma_{i}$.
+
+Sin embargo, para caracterizar completamente al sistema físico se necesita al hamiltoniano $H(\sigma)$ que está conformado en parte por la energía configuracional pero que necesita una contribución de energía  de agentes externos; en el caso de estudio y debido a que tratamos sistemas con propiedades magnéticas, hay que añadir al hamiltoniano el término:
+ \begin{equation}
+  E_{ext}(\sigma)= -h J'\sum_{i=1}^N \sigma_i = -h J' M(\sigma)
+ \end{equation}
+ donde $h$ es el valor del campo externo, $J'$ es una constante que entre otras labores, le da unidades de energía a la expresión y que dependerá del sistema que se trate, y $M$ es el valor de la magnetización del sistema que depende de la configuración que éste tenga. La magnetización del sistema no es más que la suma de los valores de cada espín de la red:
+ \begin{equation}
+ 	M(\sigma) = \sum \limits_{i=1}^{N}\sigma_{i}
+ \end{equation}
+
+De tal forma que en un modelo de sistemas magnéticos (Ising), el Hamiltoniano del sistema está dado por la suma de todas las contribuciones posibles a la energía total de nuestro sistema:
+
+\begin{equation}
+ H(\sigma) = \sum_{\langle i,j\rangle} J\sigma_i \sigma_j - J'h\sum_{i=1}^N \sigma_i
+\end{equation}
+en donde se escogen los valores de $J$ y $J'$ según se trate de un sistema ferromagnético o antiferromagnético, casos de estudio en este trabajo. 
+
+Se puede tomar en cuenta que las configuraciones del sistema tienen asociadas dos variables aleatorias, $X(\sigma)=E$ y $Y(\sigma)=M$, así que el hamiltoniano se puede reexpresar bajo la composición $H(E(\sigma),M(\sigma))$ y se puede pensar que es dependiente del par $(E,M)$ a través de
+\begin{equation}
+ H(E,M) = J E - J' h M
+\end{equation}
+
+Cuando el sistema salta de una configuración a otra, las energías interna y externa cambian de valores y es importante para efectos de este trabajo poner cuantificar estos cambios. Para ello tomará en cuenta que cuando se realizan estos saltos, sólo un espín de la configuración cambió su orientación, el espín i-ésimo $\sigma_{i}$; así la $E_{(int)}$ que es la suma de todas las contribuciones de energías de interacción entre pares no ordenados, sólo se ve afectada en los términos de los pares no ordenados que contienen al espín i-ésimo, y que según la notación usada son $V$ pares, es decir el número de vecinos que dicho espín tiene. La forma en la que cambian estas energías de interacción es únicamente en el signo, así que el cambio total para $E_{(int)}$ es:
+\begin{equation}
+\Delta E_{(int)} = -2J\sigma_{i}\sum_{j=1}^{V} \sigma_{j}
+\end{equation}
+
+De la misma forma el cambio en la magnetización del sistema está descrito por:
+\begin{equation}
+\Delta M = -2\sigma_{i}
+\end{equation}
+cuando se ha volteado el espín i-ésimo, de donde surge una expresión para el cambio en energía externa:
+\begin{equation}
+\Delta E_{(ext)} = -2hJ'\sigma_{i}
+\end{equation}
+
+
+\section{La física estadística}
+\subsection{Bases estadísticas}
+En nuestro caso, queremos propiedades particulares de observables macroscópicas como podrían ser la energía del sistema, su magnetización, algún parámetro de orden para ciertas  condiciones externas impuestas al sistema, como lo son la temperatura del baño térmico, algún campo magnético externo, etc. Para ello es necesario hacer la conexión entre la física estadísitica y la termodinámica, haciendo promedios (temporales) de variables microscópicas para obtener un estimado del valor de la variable macroscópica u observable. Así, por ejemplo si $\mathscr{Q}$ una variable observable macroscópica, ésta se puede obtener a través variables microscópicas con la relación
+\begin{equation}
+\mathscr{Q} = \langle Q \rangle = \sum_{\mu} q_{\mu}p_{\mu}^{(B)} \label{Observable}
+\end{equation}
+donde $\mathscr{Q}$ es la observable macroscópica, $\langle Q \rangle$ es el promedio temporal de los micro-estados $q_{\mu}$, y en donde la dependencia con los posibles agentes externos está contenida en $p_{\mu}^{(B)}$. En este trabajo, la probabilidad o peso estadístico de cada estado $\mu$ en \textbf{equilibrio}, está dada por la función de distribución de Boltzmann 
+\begin{equation}
+p_{\mu}^{(B)}(\beta,h) = \frac{e^{-\beta H_{\mu}}}{Z(\beta,h)} \label{P. Boltzmann}
+\end{equation}
+
+Si se suman las probabilidades de todas las configuraciones posibles $\sigma$ para una temperatura $\beta$ y un campo externo $h$ fijos, se tiene que:
+\begin{equation}
+\sum_{\mu} p_{\mu}^{(B)}(\beta,h)=1
+\end{equation}
+por lo que el factor $Z(\beta, h)$, que a partir de ahora llamaremos \textit{función de partición},  tiene como labor normalizar las probabilidades de equilibrio, de tal forma que su expresión es:
+
+\begin{equation}
+ Z(\beta,h)= \sum_{\mu} e^{-\beta H_{\mu}}
+\end{equation}
+
+La función de partición contiene toda la información termodinámica necesaria del sistema, por lo que tiene gran relevancia poder determinarla, aunque la práctica es muy difícil de obtener puesto que hay demasiados microestados ($\sigma$) y el cálculo computacional se vuelve prácticamente interminable.
+ 
+El problema se puede abordar agrupando todos los estados con misma energía configuracional y misma magnetización,  de tal forma que se realiza una suma sobre pares ordenados de la forma $(E,M)$. La función de partición depende de parámetros externos del sistema, en el caso de sistemas magnéticos, de la temperatura ($\beta$)\footnote{recordar que $\beta \propto \frac{1}{T}$} y de un campo externo aplicado ($h$)
+Por lo que la función de partición toma la forma:
+\begin{equation}
+ Z(\beta,h) = \sum_{\{E_{0}\}}\left(\sum_{\{\sigma | H(\sigma) = H_{l}\}} e^{-\beta H(\sigma)}\right)= \sum_{\{E_{0}\}}\left(\sum_{\{\sigma | H(\sigma) = H_{l}\}} e^{-\beta M(\sigma)} \right)e^{-\beta E(\sigma)}
+\end{equation}
+
+La suma entre paréntesis de la primera igualdad es simplemente un conteo de el número de estados con hamiltoniano $H_{l}$ o con $(E_{u},M{v})$,  por que la exponencial ya que cualquier configuración $\sigma$ que esté relacionada con este hamiltoniano (o este par ordenado) asignará el mismo valor a la exponencial. La expresión puede ser descrita en términos de la  \textbf{densidad de estados} denotada por $g(E,M)$, una función que asigna  la cantidad de estados $\sigma$ que llevan al par $(E,M)$. Como resultado de esta observación se obtiene que 
+\begin{equation}
+ Z(\beta, h) = \sum_{\{(E,M)\}} g(E,M)e^{-\beta H(E,M)}
+\end{equation}
+
+
+De esta forma, para poder obtener toda la termodinámica de nuestro sistema debemos 
+conocer $Z(\beta,h)$ y para ello es necesario conocer $g(E,M)$.
+Si queremos obtener observables microscópicas ($Q$) que muestren el comportamiento del sistema en función de temperatura y/o campo externo, sólo hace falta encontrar el valor promedio de dicha observable. Para ello, hay que tomar en cuenta el valor el valor la observable microscópica como función de la energía y magnetización del sistema, multiplicado por su peso estadístico dado por la distribución de Boltzmann y $g(E,M)$:
+\begin{equation}
+\label {observable-EM}
+	\langle Q \rangle (\beta, h)=\sum_{E,M} Q(E,M)g(E,M)e^{\beta H(E,M)}
+\end{equation}
+
+De esta manera, si lo que se quiere obtener es la energía macroscópica promedio a una temperatura dada por $\beta$ y para un valor del campo magnético externo $h$, la fórmula (\ref{observable-EM}) se tiene:
+\begin{equation}
+\label {observableE}
+	\langle E \rangle(\beta, h)=\sum_{E,M} E g(E,M) e^{\beta H(E,M)}
+\end{equation}
+
+En caso de que la observable $\langle Q \rangle$ tenga varios valores posibles para un $(E,M)$ se hace un promedio de ellos, que se pesará con la probabilidad de Boltzmann correspondiente.
+\\
+\\
+Hasta ahora se ha dicho el hamiltoniano depende de el par $(E,M)$, a su vez la función de partición depende del par $(\beta,h)$ y la densidad de estados de $(E,M)$. Todas estas expresiones se pueden simplificar si de inicio pensamos que el campo externo en el sistema es nulo; como consecuencia en el hamiltoniano dependerá únicamente de la energía configuracional $H=H(E)$, la función de partición será una $Z(\beta, h=0)=Z(\beta)$ y la densidad de estados aunque en principio sigue dependiendo de $(E,M)$ para efectos de los resultados en las variables termodinámicas sólo requerimos el conteo de configuraciones con energía $E$ sin importar el valor de magnetización, por lo que se tiene una densidad de estados $g=g(E)$ que se calcula con
+\begin{equation}
+	g(E)=\sum_{\{M\}} g(E,M)
+\end{equation}
+
+Nótese que una vez conocida la densidad de estados, es posible calcular la función de partición y ésta sí se puede calcular porque la suma que la define tiene una cantidad mucho más computable de términos, y como ya se había mencionado, la función de partición lo es todo para poder hacer termodinámica sobre el sistema.
+
+
+Será de gran utilidad ver desde otro ángulo la probabilidad de Boltzmann y pensar en la probabilidad de que el sistema tenga un cierto valor en energía $p^{(B)}(E_{k},\beta,h)=p^{(B)}_{k}$ y no de estar en una  configuración determinada $p_{\mu}^{(B)}$. La relación entre estas dos probabilidades  es
+\begin{equation}
+p^{(B)}(E_{k};\beta,h) =\sum_{\mu:H_{\mu}=E_{k}} p_{\mu}^{(B)}(\beta,h)
+\end{equation}
+
+
+\subsubsection{El problema en la práctica...}
+
+Hasta aquí la teoría es bastante clara y elegante, sin embargo cuando tratamos de reproducir este procedimiento en una simulación computacional, nos enfrentaremos principalmente a un gran obstáculo. En la ecuación (\ref{P. Boltzmann}) teóricamente no hay dificultad alguna, sin embargo en la práctica, tenemos problemas con el denominador ya que la suma se vuelve prácticamente imposible de realizar por la cantidad inmensa de estados posibles del sistema que se trate. El \textbf{objetivo principal} entonces es encontrar la probabilidad de una ``muestra representativa'' del sistema, en donde esté incluida para cada estado de la muestra, la constante de normalización. 
+
+Se hace notar que la constante de normalización, según la expresión dada, es independiente del estado en el que se encuentre el sistema, ya que éste se obtiene de una expresión que suma sobre todos los estados posibles, pero que tiene parámetros que pueden variar, a saber $\beta$ y $h$, de tal forma que tenemos $Z=Z(\beta, h)$.
+
+Esta discusión nos lleva a la siguiente pregunta: ?`Cómo tomar una muestra representativa??`Cómo encontrar la probabilidad de Boltzmann de dicha muestra? Los métodos que se desarrollan en este trabajo son los usados por Metrópolis (\textcolor{red}{hacer referencia}) por un lado y por Wang y Landau (\textcolor{red}{hacer referencia}) por otro.
+
+Una forma de darle la vuelta al problema de encontrar una muestra representativa es, de alguna forma, cambiar la variable de estudio y en vez de muestra sobre el conjunto de estados posibles del sistema  que son $2^{N}$, se muestra sobre el conjunto de energías accesibles, normalmente un conjunto cardinalmente mucho menor y por lo tanto computable. Para encontrar las probabilidades deseadas de las muestras se estudiará el método de Monte Carlo y las Cadenas de Markov.
+\\
+
+
+
+
+
+EN WANG-LANDAU
+
+
+\chapter{Simulación Monte Carlo}
+
+\section{Introducción}
+Cuando hablamos de métodos de Monte Carlo, nos referimos fundamentalmente a la capacidad de generar números aleatorios con cierta distribución(la más usual es una que sea uniforme) para poder resolver estadísticamente o por aproximación, problemas que analíticamente son poco prácticos de tratar. 
+La idea fundamental en los métodos de simulación Monte Carlo en la física estadística, es simular cadenas de markov que lleven a estados estacionarios, en donde la probabilidad final, es por lo general una probabilidad de la que se sabe su relación funcional pero no su valor exacto, es decir, le falta algún factor que desconocemos. En un método muy particular (metrópolis) se simulan \textit{las fluctuaciones térmicas aleatorias del sistema en ?`?`equilibrio??}, es decir, ...?`?`la secuencia de estados visitados estando el sistema en equilibrio, durante un experimento??.
+Una vez generada la cadena de markov estacionaria, se obtiene la termodinámica del sistema a través de la física estadística, es decir, se obtienen ``valores esperados'' como promedios temporales sobre los microestados que el sistema ha visitado.
+\\
+
+En principio tratamos con un sistema termodinámica con un conjunto de energías accesibles a él y que para no hacerlo tan simple (ya que de otra forma no habría cambios en el hamiltoniano definido por cada estado posible del sistema), se le pone en contacto con un baño térmico. El baño en principio crea una perturbación en el hamiltoniano original (pensando que no existiera el baño), y al ser pequeña, ésta se ignora en la expresión del Hamiltoniano pero es necesario incorporarla porque sí tiene repercusión sobre la física del sistema, ya que de hecho éste siempre estará siendo empujado (en su temperatura) hacia la temperatura del baño térmico. De esta forma, se incorporan éstos efectos en el sistema, creando en él una \textbf{dinámica}, es decir, se le da una \textbf{regla} para  cambiar ?`periódicamente? de un estado a otro. Esta regla está dada por una ecuación diferencial, la ecuación maestra, que describe la probabilidad de estar en un estado como función del tiempo, y que tiene como restricción la normalización de todas las probabilidades para un tiempo $t$ fijo.
+\subsection{Sobre Montecarlo en equilibrio}
+Cuando nuestro sistema está en equilibrio, físicamente y a nivel microscópico el sistema estará constantemente fluctuando, moviéndose entre estados accesibles que harán que a nivel macroscópico el sistema esté en un solo estado. Esta idea, matemáticamente hablando se obtiene a través de la ``ecuación maestra'' y se hablará de ella más adelante. 
+
+Si los términos del lado derecho en algún instante $t$ se cancelan, entonces todas las probabilidades tomarán valores constantes a partir de ese instante y para siempre, \textcolor{red}{no entiendo porqué}. A esto se le conoce como estado de equilibrio (macroestado de equilibrio para ser más precisos). Por cuestiones matemáticas referentes a ecuaciones de primer orden con parámetros reales, y debido a que las probabilidades están restringidas al intervalo $[0,1]$ y por lo tanto éstas no pueden crecer indefinidamente, entonces cualquier sistema gobernado por éstas ecuaciones debe finalmente, tender a un equilibrio. 
+
+Hablando un poco de la matriz de tasas de transición, se puede observar \textcolor{red}{no sé porqué}, que sus entradas no pueden tomar cualquier valor, sino que son inherentes a la naturaleza de la interacción térmica entre el sistema y el baño o reservorio.
+\subsection{Muestreo por importancia}
+Cuando se quiere información de una observable del sistema, no haremos un promedio temporal sobre todos los estados posibles del sistema, esto sería imposible para sistemas con muchos estados posibles y no habría máquina capaz de hacer esto. De tal suerte que la manera de proceder será hacer una suma sobre una cantidad muchísimo menor de estados, pero que sean suficientemente representativos del macro-estado en el que se encuentra el sistema. A este procedimiento se le llama muestreo por importancia y consiste en crear una probabilidad artificial ``conveniente'' que nos de cómo resultado una observable más o menos bien estimada a partir de un promedio temporal con pesos ``apropiados'' para cada estado escogido con dicha probabilidad artificial. El peso ``apropiado'' será
+\begin{equation}
+w_{\mu}= \frac{p_{\mu}}{\pi_{\mu}}
+\end{equation}
+
+
+Al crear este modelo en nuestra computadora, lo que se hace, es pasar a través de un conjunto de estados de tal forma que, en nuestra simulación, la probabilidad de estar en un estado particular $\mu$ en un tiempo dado $t$, sea $w_{\mu}(t)$, concordando con lo que se tendría en un sistema real. (?`?`Entonces no estoy en equilibrio??).
+Así, necesitaremos una regla para cambiar de estado a lo largo de la simulación, regla en donde cada estado deberá aparecer con la frecuencia (probabilidad) deseada ya conocida.
+La ecuación maestra, es una ecuación diferencial que nos dice cómo cambia la probabilidad de estar en un estado $\mu$ a lo largo del tiempo y viene dada por:
+\begin{equation}
+\frac{\text{d}w_{\mu}(t)}{\text{d}t}=\sum_{\nu} [w_{\nu}(t)R(\nu \rightarrow \mu)-w_{\mu}(t)R(\mu \rightarrow \nu)]
+\end{equation}
+donde el primer término de la suma, es la razón a la cual el sistema hace transiciones al estado $\mu$ y el segundo término es la razón a la cual el sistema pasa del estado $\mu$ otro estado.
+
+Recordemos que suponiendo al sistema en un estado $\mu$, definimos a la frecuencia (probabilidad) con la que se estará en un estado $\nu$ un tiempo d$t$ posterior, como $R(\mu \rightarrow \nu)\text{d}t$. De esta forma, $R(\mu \rightarrow \nu)$ es la ``razón de transición'' para pasar de un estado $\mu$ a otro $\nu$. \textcolor{red}{EJEMPLO: si la probabilidad de estar en $\mu$ es 1/4, y la probabilidad de estar en $\nu$ es 1/20, entonces $R(\mu \rightarrow \nu)=\frac{\frac{1}{4}}{\frac{1}{20}}=\frac{20}{4}=5$}
+
+\section{Cadenas Markovianas y no markovianas}
+
+Tomando en cuenta que como objetivo principal en simulaciones de sistemas termodinámicos, se quieren obtener observables a través de (\ref{Observable}) es necesario como ya se había mencionado encontrar una muestra representativa, y su ella su respectiva probabilidad, la que en cada caso particular se requiera. Visto de este modo, se está buscando algún mecanismo o proceso que elija del universo de estados posibles de nuestro sistema, un subconjunto o muestra suficientemente representativa, y de la cuál se extraiga alguna probabilidad o frecuencia deseada en cada problema o situación partícula, y que sea única. Esto último significa que dicho mecanismo o proceso lleve siempre a la misma probabilidad y no a alguna otra. El mecanismo o proceso que hace posible la elección de una muestra representativa se llama ``cadena de Markov'' y se profundizará un poco en su teoría. Por otra parte, para encontrar la probabilidad adecuada a dicha muestra, se hace uso de dos propiedades que pueden presentar las cadenas, ellas son, la irreducibilidad y la aperiodicidad y se definirán más adelante.
+
+En el caso de nuestra simulación el espacio de eventos $\Omega$ es el conjunto de estados del sistema, que por principio de cuentas tiene una carnalidad $2^{N}$.
+Sobre este espacio, definimos dos variables aleatorias, a saber, la Energía ($X$) y la Magnetización ($Y$):
+\begin{equation}
+X(\sigma) = E
+\end{equation}
+\begin{equation}
+Y(\sigma) = M
+\end{equation}
+de tal forma que los posibles valores de estas variables aleatorias son sus rangos
+\begin{equation}
+R_{X} = \{E_{0}, E_{1}, E_{2}, ..., E_{m} \}
+\end{equation}
+\begin{equation}
+R_{Y} = \{M_{0}, M_{1}, M_{2}, ..., E_{n} \}
+\end{equation}
+
+En una simulación se crea una cadena de valores de variables aleatorias, $\{X_{t_{0}},X_{t_{1}},X_{t_{2}},...\}$ y $\{Y_{t_{0}},Y_{t_{1}},Y_{t_{2}},...\}$ en donde el subíndice se puede ver como el tiempo o paso de la simulación. Debe quedar claro que dos elementos de la sucesión de la variables aleatoria pueden tener el mismo valor, por ejemplo en los tiempo $t_{l}$ y $t_{k}$.
+
+Supongamos que en un tiempo $t$ el sistema tiene una distribución de probabilidad 
+\begin{equation}
+	\vec{\pi}(t) = (\pi(t,E_{1}), \pi(t,E_{2}),...,\pi(t,E_{m}) )
+\end{equation}
+es decir $\pi_{k}(t)=\pi(t,E_{k})$, es la componente i-ésima  del vector distribución de probabilidad y corresponde a la probabilidad de encontrar tener al sistema con energía $E_{k}$ al tiempo $t$ en la cadena de markov.
+
+
+Como siguiente idea nos gustaría conocer la probabilidad de que el sistema tenga energía $E_{j}$ en el tiempo inmediato posterior $t+1$. La intuición nos dice que dicha probabilidad depende del estado energético del sistema en el tiempo inmediato anterior únicamente. A esta peculiaridad en la secuencia o cadena de estados se le llama propiedad Markoviana y decimos que la cadena que se genera es una cadena de Markov. De esta forma podemos definir dos probabilidades que estarán relacionadas entre sí. Una de ellas es la probabilidad total de encontrar al sistema en el estado $i$ al tiempo $t+1$, que denotaremos $\vec{\pi}(t)$; por otro lado está una probabilidad debido a la propiedad markoviana, una \textbf{probabilidad condicionada}, que podemos describir como ``la probabilidad de saltar al estado $E_{j}$ en el tiempo $t+1$ suponiendo que el sistema tenía energía $E_{i}$ en el tiempo $t$'', y que será denotada:
+\begin{equation}
+	P(E_{j},t+1 | E_{i}, t) = P_{ij}(t,t+1) = T(t, E_{i}\rightarrow E_{j})
+\end{equation}
+
+De esta forma se está suponiendo que la 
+\begin{equation}
+	P(E_{j},t+1 | E_{i}, t) \neq P(E_{j},t'+1 | E_{i}, t')
+\end{equation}
+es decir, la probabilidad condicionada depende del tiempo en el que ésta se quiera medir, y por consiguiente la probabilidad de transición $T(t, E_{i}\rightarrow E_{j})$ tiene la misma propiedad. A las cadenas de Markov con esta peculiaridad se les llama cadenas \textit{inhomogéneas}. Mientras que si sucede que 
+\begin{equation}
+	P(E_{j},t+1 | E_{i}, t)=P(E_{j},t'+1 | E_{i}, t')
+\end{equation}
+se dice que la cadena de Markov que se genera es \textit{homogénea}, siendo independiente del tiempo en que se quiere medir la probabilidad condicionada o, equivalentemente, la probabilidad de transición.
+\\
+\\
+Estas mismas ecuaciones pueden ser descritas para variables aleatorias continuas. Por ejemplo la probabilidad condicionada:
+\begin{equation}
+	P_{ij}(t, \Delta t)=P(E_{j},t+\Delta t | E_{i}, t) = T(t,\Delta t, E_{i}\rightarrow E_{j})=T_{ij}(t, \Delta t)
+\end{equation}
+y si la cadena fuera homogénea entonces la probabilidad ya no depende del tiempo en que se quiere medir, sino solo de la diferencia o intervalo de tiempo $\Delta t$ que pasa para que el sistema pase del estado $i$ al estado $j$:
+\begin{equation}
+	P(E_{j},t+\Delta t | E_{i}, t) = P_{ij}(\Delta t) 
+\end{equation}
+y es válida para cualquier tiempo $t$.
+\\
+
+Una magnitud física importante es la tasa o razón de probabilidad, la cual compara el cambio en la probabilidad de transición con respecto al tiempo. Matemáticamente es una derivada temporal y queda definida de la siguiente forma:
+%\begin{equation}
+%w_{ij}(t) = \frac{d P_{ij}(t)}{dt}=\lim_{\Delta t \rightarrow 0}\frac{P_{ij}(t+\Delta t) - P_{ij}(t)}{\Delta t}
+%\end{equation}
+\begin{equation}
+w_{ij}(t) = \lim_{\Delta t \rightarrow 0}\frac{P_{ij}(t,\Delta t)}{\Delta t}  \label{aprox}
+\end{equation}
+y si se tienen valores $\Delta t$ muy pequeños (i.e. $\Delta t \approx dt$), entonces
+\begin{equation}
+	P_{ij}(t,dt) \approx w_{ij}(t) dt 
+\end{equation}
+
+
+Más adelante se verá que el algoritmo de Metrópolis genera una cadena de Markov homogénea, mientras que el algoritmo de Wang-Landau parece ser una cadena de Markov inhomogénea.
+\\
+
+
+
+En este punto se puede observar que los subíndices parecen sugerir la entrada $(i,j)$ de una matriz, de tal forma que tendremos una \textit{matriz de transición} $P$ y al ser una matriz de probabilidades satisface
+\begin{equation}
+\sum_{j=1}^{m} P_{i,j}(t,\Delta t)=1
+\end{equation}
+donde el valor de la variable aleatoria en el tiempo $t$, $X(t)=E_{i}$ está fijo.
+\\
+
+
+Las cadenas de Markov también satisfacen la ecuación de Chapman-Kolmogorov(C-K):
+\begin{equation}
+\sum_{k=1}^{m} P_{i,k}(t, \Delta t)P_{k,j}(s,\Delta s)=P_{i,j}(t+s,\Delta (t+s))
+ \end{equation}
+ con $\Delta (t+s)=\Delta t +  \Delta s$, y nos dice que una probabilidad de transición, es decir un camino para ir desde $i$ hasta $j$ se puede dividir en dos caminos, uno desde $i$ hasta $k$ y otro desde $k$ hasta $j$ y además cada camino, y por lo tanto cada probabilidad es independiente, de tal forma que la probabilidad total es el producto de cada probabilidad intermedia.
+ 
+ En el caso de cadenas Markovianas homogéneas la expresión se simplifica ya que las probabilidades de transición sólo dependen de la variación de tiempo (diferencia de tiempos) entre $t$ y $t+\Delta t$, es decir, sólo dependen de $\Delta t$. C-K quedaría así:
+ \begin{equation}
+\sum_{k=1}^{m} P_{i,k}(\Delta t)P_{k,j}(\Delta s)=P_{i,j}(\Delta t + \Delta s)
+ \end{equation}
+
+\subsection{Ecuación Maestra}
+
+Sin embargo, no se debe perder de vista la meta principal: ``Conocer  la probabilidad  de que el sistema tenga energía $E_{i}$ sin importar cuál es el estado anterior'', para la cual hay que tomar en cuenta todos los estados energéticos posibles que el sistema pudo haber tenido en el tiempo anterior $t$, es decir, todas las transiciones posibles que lleven al sistema al estado con energía $E_{i}$. Habrá tantas contribuciones a la probabilidad total, como posibles energías del sistema ($m$ en total), y cada contribución tiene dos componentes, la probabilidad de transición $T(t, E_{k}\rightarrow E_{i})$ y la probabilidad total de encontrar al sistema en el tiempo  $t$ con energía $E_{k}$, $P(t,E_{k})$\footnote{recordemos que $\textbf{P}(A \cap B)=\textbf{P}(A|B)\textbf{P}(B)$}:
+
+\begin{equation}
+\pi_{i}(t+1) =\sum_{k=1}^{m} \pi_{k}(t)  {P}_{k,i}(t) 
+\end{equation}
+
+Esta misma ecuación puede ser descrita usando variables aleatorias continuas:
+\begin{equation}
+\pi_{i}(t+dt) =\sum_{k=1}^{m}   \pi_{k}(t) {P}_{k,i}(t,dt)
+\end{equation}
+
+
+Por otro lado en una cadena \textit{no markoviana} la probabilidad de estar en un estado $\sigma$ con energía $E_{j}$, $\pi(t,X(\sigma)=E_{j})$ puede depender de varios pasos anteriores y no sólo del antecesor inmediato, así como del tiempo $t$ en que se quiere medir dicha probabilidad.
+
+La ecuación que gobierna el comportamiento de la probabilidad de encontrar al sistema con energía $E_{i}$ al tiempo $t$ es una ecuación diferencial que caracteriza a $\frac{\pi_{i}(t)}{dt}$, y describe la velocidad de cambio de dicha probabilidad. Para la deducción de la ecuación se encuentra una expresión para $\pi_{i}(t+dt)$ de la ecuación $tal$ y que puede ser reexpresada separando el término de la suma que corresponde a no cambiar de energía en el tiempo $dt$
+
+\begin{equation}
+\pi_{i}(t+dt) =\sum_{k=1, k\neq i}^{m}  \pi_{k}(t) {P}_{k,i}(t,dt)   + \pi_{i}(t)  {P}_{i,i}(t,dt) 
+\end{equation}
+donde se toma en cuenta que la probabilidad de transición debe estar normalizada, de tal forma que el segundo término de lado derecho toma la forma
+\begin{equation}
+\pi_{i,i}(t,dt)= 1-\sum_{k=1, k\neq i}^{m}  {P}_{i,k}(t,dt)
+\end{equation}
+La ecuación que rije las probabilidades del sistema es llamada \textit{ecuación maestra} y tendrá forma
+\begin{equation}
+\pi_{i}(t+dt) =\sum_{k=1, k\neq i}^{m}   \pi_{k}(t)  {P}_{k,i}(t,dt) + \pi_{i}(t) \left(1-\sum_{k=1, k\neq i}^{m}  {P}_{i,k}(t,dt)\right)
+\end{equation}
+Recordando que se puede utilizar (\ref{aprox}) y reexpresar la ecuación como:
+\begin{equation}
+\frac{\pi_{i}(t+dt)-\pi_{i}(t)}{dt} = \sum_{k=1, k\neq i}^{m}   \pi_{k}(t)  \frac{{P}_{k,i}(t)}{dt} -\sum_{k=1, k\neq i}^{m} \pi_{i}(t)  \frac{{P}_{i,k}(t)}{dt}
+\end{equation}
+y por último tomando en límite cuando $dt\rightarrow 0$ llegamos a la ecuación final
+
+\begin{equation}
+\boxed{\frac{d\pi_{i}(t)}{dt} = \sum_{k=1, k\neq i}^{m} \pi_{k}(t)  w_{k,i}(t)-\sum_{k=1, k\neq i}^{m} \pi_{i}(t)  w_{i,k}(t)}	\label{ec maestra}
+\end{equation}
+que es una ecuación de continuidad y se conoce como ecuación maestra. Se puede hacer la observación siguiente, que aunque algo trivial, será de gran importancia más adelante: sumamos y restamos el término $\pi_{i}(t)  w_{i,i}(t)$, que es la probabilidad de permanecer en el mismo estado, por lo que la restricción en (\ref{ec maestra}) que nos dice que $k\neq i$ desaparece y la ecuación final resulta en:
+\begin{equation}
+\boxed{\frac{d\pi_{i}(t)}{dt} = \sum_{k=1}^{m} \pi_{k}(t)  w_{k,i}(t)-\sum_{k=1}^{m} \pi_{i}(t)  w_{i,k}(t)}	\label{ec maestra final}
+\end{equation}
+Será la ecuación que rija el comportamiento temporal de las probabilidades y a partir de ella se desarrollan todos los algoritmos que describen el comportamiento de sistemas de nuestro interés.
+\subsection{Cadenas de Markov irreducibles}
+
+Definimos ahora \textbf{cadenas de Markov irreducibles} como aquellas en las que dos valores cualesquiera de la variable aleatoria en cuestión, existe un puente que se puede crear a través de una cadena de Markov.
+
+Matemáticamente se dice que una cadena de Markov $(X_{0},X_{1},X_{2},...)$ con valores posibles $\{E_{1},E_{2},...,E_{m}\}$ y matriz de transición $P$ es irreducible si $\exists \tau>0$ tal que el producto $P(t)P(t+1)\cdot \cdot \cdot P(t+\tau)>0$.
+
+\subsection{Cadenas de Markov aperiódicas}
+
+Ahora definimos \textbf{Cadena de Markov aperiódica} como aquella, para cualquier par de tiempos en la cadena de markov, la probabilidad de estar en este par tiempos en el estado $E_{i}$, es decir de hacer un ciclo que tenga como estado inicial y final el mismo valor $E_{I}$, es siempre mayor que cero. Notemos el menor intervalo de tiempos en el que se puede crear uno de estos ciclos es de 1 paso o 1 segundo.
+Matemáticamente podríamos escribir que una cadena de Markov $(X_{0},X_{1},X_{2},...)$ con valores posibles $\{E_{1},E_{2},...,E_{m}\}$ y matriz de transición $P$ es aperiódica si $\forall i$ y $\forall \tau \geq 1$, se cumple que $P_{i,i_{1}}(t)P_{i_{1},i_{2}}(t+1)\cdot \cdot \cdot P_{i_{\tau-1},i}(t+\tau)>0$.
+\\
+
+Bajo las dos propiedades anteriores, se puede asegurar que una cadena de Markov \textbf{converge} a una distribución estacionaria cuando $n \rightarrow \infty$. No sólo eso, sino que además se ha demostrado que la distribución estacionaria será \textbf{única} y no dependerá de la distribución \textbf{inicial} que se escoja. De esta forma se puede concluir que las dos propiedades vistas son condiciones suficientes para la existencia y unicidad de una distribución estacionaria que no depende de condiciones iniciales.
+
+\subsection{Cadenas de Markov reversibles}
+
+Ahora nos encontramos frente a un tipo particular de cadenas de Markov que tienen la propiedad de ser estacionarias y tener a una distribución límite única sin importar el estado inicial de sistema, aquellas que son reversibles y que constituyen una mayor restricción a la cadena. Se trata de cadenas irreducibles y aperiódicas pero que con una restricción más.
+
+Normalmente la condición estacionaria tiene sentido cuando el lado izquierdo de la ecuación maestra (\ref{ec maestra final}) es cero, reescribiéndose como
+\begin{equation}
+	\boxed{ \sum_{k=1}^{m} \pi_{k}(t)  w_{k,i}(t)=\sum_{k=1}^{m} \pi_{i}(t)  w_{i,k}(t)} \label{edo estacionario}
+\end{equation}
+
+Dicha condición (o imposición) se puede interpretar como un balance entre la suma total de las tazas de transición que me llevan ``hacia'' el estado $i$ con la suma total de las tazas de transición que me llevan ``fuera'' del estado $i$.
+
+En muchas ocaciones la restricción extra, llamada \textbf{reversibilidad} o \textbf{balance detallado} surge de la ecuación (\ref{edo estacionario}), se incorpora a los modelos computacionales como una imposición que puede o no tener sentido físico pero que sin duda alguna simplifica el modelo y su parte matemática y se logra igualando término a término las sumas de ambos lado de la ecuación. Esta condición extra recibe el nombre de \textbf{reversiblidad} o de \textbf{balance detallado} y significaría que:
+\begin{equation}
+	\boxed{  \pi_{k}(t)  w_{k,i}(t)= \pi_{i}(t)  w_{i,k}(t)}
+\end{equation}
+
+Ahora se debe remarcar la diferencia entre estar en equilibrio o tender a una estado de equilibrio. Algunos algoritmos se basan en el hecho de que la cadena de Markov tiende a un valor fijo de probabilidad para cada estado $i$, y se dice que la probabilidad tiende a un valor estacionario, la diferencia aquí es que a partir la ecuación maestra (\ref{ec maestra final}) se está obteniendo el límite  cuando $t \rightarrow \infty$ y el lado izquierdo a cero, por lo que ahora se puede reescribir
+\begin{equation}
+\lim_{t \rightarrow \infty}\sum_{k=1}^{m} \pi_{k}(t)  w_{k,i}(t) = \lim_{t \rightarrow \infty} \sum_{k=1}^{m} \pi_{i}(t)  w_{i,k}(t)
+\end{equation}
+
+De tal forma que si las probabilidades son estacionarias para tiempos muy grandes entonces las probabilidades tienden a valores constantes: 
+\begin{equation}
+	\lim_{t \rightarrow \infty}  \pi_{k}(t) = \pi_{k}^{(eq)}
+\end{equation}
+y
+\begin{equation}
+	\lim_{t \rightarrow \infty}  w_{k,i}(t) = \omega_{k,i}^{(eq)}
+\end{equation}
+donde se ha supuesto, en adición, que cuando el límite de estar en el estado $k$, $ \pi_{k}$ el límite de las tasas de cambio también tiende a algún valor $\omega_{k,i}$, lo cual no es en una primera impresión nada trivial.
+
+\textbf{Los algoritmos que se han desarrollado para sistemas estacionarios se centran en investigar cómo esta ecuación se puede satisfacer y así generar la cadena de Markov adecuada que tienda a la distribución de probabilidad en equilibrio que se fija previamente por el investigador.}
+
+\subsection{Balance detallado}
+
+Si tomamos como punto de partida, que se  satisface en algún modelo o sistema termodinámico la ecuación de balance detallado, entonces la pregunta será...
+
+
+
+\subsection{Generación de la cadena de Markov}
+Para empezar a generar una cadena de markov necesitamos una distribución inicial, es decir un vector de tantas entradas como valores posibles de energía $E_{m}$, en donde en cada componente se indica cuál es la probabilidad de que el sistema comience cada estado $E_{m}$:
+
+\begin{equation}
+	\vec{\pi}(0) = \left( \pi_{1}(0), \pi_{2}(0),..., \pi_{m}(0)\right)
+\end{equation}
+Para encontrar la distribución de probabilidades en el tiempo $t$ el razonamiento es equivalente y entonces:
+\begin{equation}
+	\vec{\pi}(t) = \left( \pi_{1}(t), \pi_{2}(t),..., \pi_{m}(t)\right)
+\end{equation}
+
+Ahora, como se hace en inducción, necesito alguna forma de avanzar en el tiempo la simulación. Para ello se requiere alguna operación o función $\phi$ que, me lleve de un valor de $X(t')$ en el tiempo $t' < t$ a un estado $X(t)$ en el tiempo $t$.
+\\
+\section{Dos algoritmos para MCMC}
+Se hablará principalmente de dos métodos MCMC. En ambos casos se intenta predecir valores de variables macroscópicas u observables $Q$, dependientes de agentes externos (que serán las variables independientes) como la temperatura ($T$) y/o el campo magnético externo ($h$), es decir $Q(T, h)$ en el caso más general. Para ello necesitamos calcular la distribución de probabilidad de Boltzmann, que es el objetivo general de las simulaciones MCMC.
+\subsection{Metrópolis}
+El objetivo principal: Encontrar para una temperatura fija $T$ y/o algún valor del campo externo $h$ también fijo, la distribución de probabilidad de energías del sistema $\textbf{p}_{\mu}(T,h)$. Esto implica que si se cambia el valor de la temperatura o el campo externo se tendrá que ejecutar otra simulación para los nuevos parámetros.
+
+Este método reproduce el comportamiento del sistema cuando es puesto en contacto con un baño térmico. Sin pérdida de generalidad, al inicio el sistema no se encuentra en equilibrio térmico con su baño. Es de esperarse por tanto, que el sistema después de cierto tiempo en el que el sistema esté fuera de equilibrio, logre obtener la temperatura del baño térmico. Desde el punto de vista microscópicamente, cuando el sistema haya llegado al equilibrio térmico, se observará que ahora su temperatura se ha igualado a la del baño y se  le observará fluctuando, es decir, cambiando de una configuración a otra de tal forma que si se hiciera un promedio temporal de alguna variable microscópica obtendríamos como resultado, gracias a la física estadística, un estado macroscópico representado por un valor (igual al promedio de la variable microscópica) de la variable macroscópica asociado a la temperatura de equilibrio del sistema. 
+
+La idea, computacionalmente hablando es simular este proceso de equilibración térmica de nuestro sistema y las correspondientes fluctuaciones con las que obtendremos propiedades y observables macroscópicas. La meta se logrará pidiendo que la probabilidad de equilibrio a la que se tiende en la ecuación maestra de la cadena de markov sea la probabilidad de Boltzmann:
+\begin{equation}
+\pi_{k}^{(eq)}\propto e^{-\beta H_{k}}
+\end{equation}
+
+Así cada energía que aparezca en las fluctuaciones microscópicas se crea con la probabilidad adecuada según la teoría predice, y además son las más representativas usando un ``muestreo ponderado'' con el propósito de encontrar observables macroscópicas.
+
+
+\subsection{Wang-Landau}
+El objetivo principal: Encontrar la densidad de estados $g(E)$ del sistema a estudiar. En principio con esta función toda la termodinámica del sistema puede ser resuelta.
+
+Metodología: La idea principal detrás de este algoritmo es lograr que durante nuestra simulación, se visiten todas las energías posibles con la misma frecuencia, obteniendo como resultado un histograma ``plano''. Para ello se busca que la probabilidad de equilibrio de la cadena de markov, en función de la energía, sea una constante:
+\begin{equation}
+\vec{\pi}^{(eq)}=\vec{C}=(C,C,...,C)
+\end{equation}
+donde el vector tiene $m$ entradas, la cantidad total de energías accesibles al sistema. Es decir se crea un algoritmo que logre visitar todos o la mayor cantidad de energías accesibles, todas ellas con la misma probabilidad. Pensando que la $g(E)$ es una función que mide la cantidad de estados de cada valor posible de energías podemos notar que entre más estados haya con una energía $E_{k}$, conviene que la probabilidad de estar en dicho estado sea pequeña. La manera de lograr esto es crear una probabilidad que sea inversamente proporcional a la $g(E)$, y entonces 
+\begin{equation}
+\pi_{k}^{(eq)}=\pi^{(eq)}(E_{k})\propto \frac{1}{g(E_{k})} \quad \forall k=1,2,..,m \label{prob w-l}
+\end{equation}
+
+Todo este análisis es correcto pero todavía no se ha logrado nada ya que, recordando el objetivo principal, la intención es obtener la densidad de estados del sistema, lo que quiere decir que en realidad a priori no la conocemos, y entonces no hay forma por el momento de utilizar (\ref{prob w-l}).
+\section{Razones de aceptación}
+Si suponemos que la condición de balance detallado se satisface para los sistemas de estudio, tendríamos la expresión
+\begin{equation}
+\frac{\omega_{k,i}}{\omega_{i,k}}=\frac{\pi_{i}^{(eq)}}{\pi_{k}^{(eq)}}
+\end{equation}
+
+Utilizando el algoritmo de Metrópolis la ecuación quedaría
+\begin{equation}
+\frac{\omega_{k,i}}{\omega_{i,k}}=e^{-\beta \left[ H (\tau)-H(\sigma)\right]}=e^{-\beta \Delta H}
+\end{equation}
+
+Por otro lado en el algoritmo de Wang-Landau se obtiene para la misma ecuación la expresión
+\begin{equation}
+\frac{\omega_{k,i}}{\omega_{i,k}}=\frac{\frac{C}{g(E_{i})}}{\frac{C}{g(E_{k})}}=\frac{g(E_{k})}{g(E_{i})}
+\end{equation}
+
+Debemos recordar que lo imprescindible para generar la cadena de markov que además converja a la distribución de probabilidad estacionaria deseada. Para generar la cadena adecuada debemos dar la taza de probabilidades de transición. Para ello se ve a dicha taza como el producto de otras dos cantidades
+\begin{equation}
+\omega_{k,i}=\gamma_{k,i}\cdot  \alpha_{k,i}
+\end{equation}
+donde cada factor tiene su interpretación. El factor $\gamma_{k,i}$ se describe como una probabilidad de selección, y mide la probabilidad de que nuestro algoritmo partiendo de la energía $E_{k}$ pueda acceder a algún estado con energía $E_{i}$. Esta probabilidad está enteramente determinada por nosotros. Por ejemplo en un sistema de espines, dada una configuración inicial, los estados que le son accesibles  dependen de cuántos espines se desee cambiar en cada paso(tiempo) de la simulación; así y se voltea solo un espín tendremos un conjunto de energías nuevas posibles y si volteamos dos, tendremos un conjunto distinto de nuevas energías. Se puede decir que $\gamma_{k,i}$ es una especie de matriz de estados accesibles al sistema. El segundo factor $\alpha_{i,k}$ es la taza de probabilidad de aceptación y mide la probabilidad de que se acepte el cambio propuesto en $\gamma_{k,i}$. Esta probabilidad es la se tiene que escoger con mucho cuidado para que se obtenga con eficiencia la probabilidad de equilibrio deseada en la cadena de markov. Entonces se tiene libertad para escoger a $\alpha_{k,i}$, es decir, la función que se necesita para satisfacer balance detallado no es única, por lo que el problema es proponer la más eficiente posible. En el caso de el algoritmo de Metropolis se da 
+\begin{equation}
+	\alpha_{k,i}=\left\{
+\begin{array}{c l}
+ 1 \text{ si } \Delta H < 0\\
+ e^{-\Delta H} \text{ si } \Delta H > 0\\
+\end{array}
+\right.
+\end{equation}
+
+Para el algoritmo de Wang-Landau la regla para la la taza de transición es
+\begin{equation}
+	\alpha_{k,i}=\left\{
+\begin{array}{c l}
+1 \text{ si } \frac{g(E_{k})}{g(E_{i})} < 1\\
+\frac{g(E_{k})}{g(E_{i})} \text{ si } \frac{g(E_{k})}{g(E_{i})} > 0\\
+\end{array}
+\right.
+\end{equation}
+\\
+
+
+
+
+
+
+
+En particular nos interesa estudiar parámetros de orden que son observables que,
+ cuando el sistema se encuentra totalmente ordenado toman un valor máximo (1 si está 
+ normalizado) y un valor mínimo (cero) si el sistema se encuentra en completo desorden.
+ La dificultad radica en encontrar el parámetro adecuado para el sistema en estudio.
+ Para la red cuadrada, un material ferromagnético bidimensional, el parámetro de orden adecuado 
+ es la magnetización macroscópica. El mismo material pero para una red triangular, el parámetro usual es la llamanda \textit{magnetización staggered}, donde se divide a la red original en 
+ dos subredes como se muestra en la figura. Ahora cada subred tiene una magnetización
+ microcanónica $M_1$ y $M_2$ y el parámetro de orden se define como:
+ \begin{equation}
+  M_s = M_1 - M_2
+ \end{equation}
+ 
+El objetivo principal de nuestro estudio es encontrar transiciones y diagramas de fase en distintos materiales a través de la simulación por computadora, que reproducir o predecir comportamientos que sirvan a diferentes propósitos eventualmente. Hasta ahora el observable por excelencia que sirve a este propósito es sin duda el \textit{parámetro de orden}.
+De esta forma una primer dificultad, al tratar de simular materiales por computadora, es encontrar un parámetro de orden adecuado al problema en cuestión. Sin embargo, y como primera hipótesis se planteará que no es ''tan'' indispensable definir uno para cada tipo de problema, ya que hay otros observables del que se puede obtener información necesaria para detectar posibles transiciones de fase y construir sus diagramas de fase. Éstas parecieran ser a primera vista, la \textit{capacidad calorífica} y el \textit{cumulante de Binder} en materiales ferromagnéticos que presentan transiciones de fase en función de temperatura y campos magnéticos externos.
+\\
+\\
+ 
+
+
+\chapter{Algoritmo y su implementación}
+
+\section{Wang-Landau}
+El algoritmo desarrollado por Wang y Landau se centra en encontrar la densidad de 
+estados con la siguiente metodología: al principio se trata de visitar la mayor parte
+del espacio de estados ${(E,M)}$ de manera uniforme\footnote{uniforme significa que cada estado se visite el mismo número de veces}, construyendo un histograma sobre él, obteniendo de esta forma una valor bastante burdo para la función de densidad 
+de estados $g(E)$ del sistema, para después proceder haciendo ajustes más 
+``finos'' y encontrar valores más precisos de $g(E)$. Por esta razón se trata de un algoritmo que usa cadenas \textit{no markovianas} que además no satisfacen la condición de balance detallado, pero que sin embargo convergen al valor adecuado de $g(E)$.
+
+Sin embargo, se ha visto que el sistema pasa la mayor cantidad de tiempo mejorando  valores extremos de la energía configuracional $E$. En contraposición para valores centrales de $E$ o alrededor de cero, se observa que para una energía fija, hay valores de magnetización que $M$ del sistema que nunca se visitan. Esto representa un gran problema si al Hamiltoniano del sistema se le agrega un término debido a factores externos como un campo magnético $h$.
+
+
+Este modelo es eficiente y rápido hablando en tiempo de cómputo cuando se trata de una densidad de estados que depende únicamente de la energía configuracional $E$. Esto se presenta cuando el hamiltoniano. El problema se presenta cuando se incluye al sistema un campo magnético externo $h$ que modifica la función de partición y la hace adicionalmente dependiente de la magnetización del sistema teniendo ahora una función de partición 
+\begin{equation}
+g(E,M)
+\end{equation}
+con la que el algoritmo  requiere una cantidad mucho mayor de recursos computacionales. En el presente trabajo se intenta variar un poco el algoritmo original para poder hacerlo un poco más eficiente. Se basa en encontrar a $g(E,M)$ a través de $g(E)$, esperando que, aunque la probabilidad de saltar  de un estado energético a otro sólo dependa de la energía, se logren visitar todas las magnetizaciones posibles para una energía dada.
+
+Se ha observado en las simulaciones que el algoritmo pasa más tiempo haciendo más precisa partes de g(E,M) en regiones extremas de E, mientras que en el centro, la precisión de este algoritmo se ve drásticamente disminuida.
+
+En esencia el algoritmo para encontrar a $g(E,M)$ debe cumplir los siguientes pasos.
+\begin{enumerate}
+	\item Se inicializa la función $g(E,M)=0 \quad \forall E, M$ y una variable $f=1$ llamada factor de modificación. 
+	\item Se elige un estado del sistema, dado por el par $(E,M)$.
+	\item Se propone un espín de la red al azar, del que posiblemente se cambiará la orientación.
+	\item Se calcula la energía y magnetización que tendría la red si este espín fuera volteado. Estas serían $E_{n}$ y $M_{n}$ respectivamente.
+	\item Se hace la diferencia $\Delta = g(E_{n},M_{n})-g(E,M)$.
+	\item Casos según el valor de $\Delta$:
+	\begin{enumerate}
+		\item En caso de que $\Delta<0$ se acepta el cambio del espín propuesto. Se actualiza el estado del sistema $(E,M)=(E_{n},M_{n})$. Se actualiza la función de partición $g(E,M)=g(E,M)+f$
+		\item En caso de que $\Delta>0$, se tienen las siguientes posibilidades:
+		\begin{enumerate}
+			\item Si $e^{-\Delta}<r$ se acepta el cambio del espín propuesto. Se actualiza el estado del sistema $(E,M)=(E_{n},M_{n})$. Se actualiza la función de partición $g(E,M)=g(E,M)+f$. Aquí $r\in (0,1)$ y es elegido aleatoriamente.
+			\item Si $e^{-\Delta}>r$ el cambio de espín propuesto no se realiza y sólo se actualiza la función de partición a $g(E,M)=g(E,M)+f$.
+		\end{enumerate}
+	\end{enumerate}
+	\item Este procedimiento se realiza hasta que todos los estados de energía que hasta el momento se han logrado visitar se han visitado por lo menos $m$ veces. De lo contrario se repiten los pasos 1) a 6).
+	\item Se actualiza el factor de modificación $f=f/2$*****.
+	\item Se repiten los pasos 1) a 8) hasta que el factor de modificación $f$ tome cierto valor previamente acordado.
+\end{enumerate}
+
+
+Este algoritmo funciona muy bien y ha mostrado reproducir resultados obtenidos en otras bibliografías***, sin embargo como se ha mencionado, con sistemas grandes el algoritmo se vuelve muy pesado y requiere mucha potencia computacional.
+Para intentar reducir los recursos computacionales se intenta usar el algoritmo de Wang-Landau pero para una densidad de estados sólo dependiente de $g(E)$. Sin embargo es necesario tener el registro de las magnetizaciones visitadas para cada $E$ y para ello utilizamos un histograma en $(E,M)$, que en el transcurso de la simulación nos dará un estimado de $g(E,M)$ aún cuando se esté construyendo sólo $g(E)$.
+\\
+
+El problema principal es que cuando se usa el algoritmo para encontrar $g(E)$ se observa que no se logran visitar todas las magnetizaciones posibles para una energía $E$ fija, por lo que la información termodinámica necesaria para encontrar transiciones de fase está incompleta y poco fiable. 
+Para tratar de solventar esta situación se implementa el mismo algoritmo varias veces y de forma simultánea, pero se actualiza sólo una función de partición $g(E,M)$. Para ello se inician, por ejemplo, $k$ sistemas y por tanto $k$ algoritmos de tal forma que habrá simultáneamente $k$ estados. Esto sin duda alguna contribuye a que la simulación visite una mayor cantidad de estados $(E,M)$ del sistema, pero no parece ser completamente eficiente, manifestándose sobre todo en redes triangulares para sistemas antiferromagnéticos y con presencia de un campo magnético externo...
+
+
+
+
+
+
+
+
+\end{document}
